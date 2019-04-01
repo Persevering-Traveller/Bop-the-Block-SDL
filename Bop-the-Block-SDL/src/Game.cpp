@@ -17,7 +17,7 @@ bool Game::Init()
 	}
 	else
 	{
-		window = SDL_CreateWindow("Bop the Block", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 		if (!window)
 		{
 			std::cout << "A window could not be created!\n";

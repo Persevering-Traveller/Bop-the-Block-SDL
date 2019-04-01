@@ -11,6 +11,10 @@ public:
 	void Quit();
 
 private:
+	const int WINDOW_WIDTH = 640;
+	const int WINDOW_HEIGHT = 480;
+	const char* WINDOW_NAME = "Bop the Block";
+
 	void Update();
 	void Draw();
 
