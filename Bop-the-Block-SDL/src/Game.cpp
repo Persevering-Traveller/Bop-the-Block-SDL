@@ -23,6 +23,19 @@ bool Game::Init()
 			std::cout << "A window could not be created!\n";
 			status = false;
 		}
+		else
+		{
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+			if (!renderer)
+			{
+				std::cout << "Could not create the renderer!\n";
+				status = false;
+			}
+			else
+			{
+				SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
+			}
+		}
 	}
 
 	return status;
@@ -41,6 +54,8 @@ void Game::Quit()
 {
 	if (window)
 		SDL_DestroyWindow(window);
+	if (renderer)
+		SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 }
 
@@ -59,6 +74,9 @@ void Game::Update()
 	}
 }
 
-void Game::Draw() {
-
+void Game::Draw() 
+{
+	SDL_RenderClear(renderer);
+	// Cool draw code here
+	SDL_RenderPresent(renderer);
 }
