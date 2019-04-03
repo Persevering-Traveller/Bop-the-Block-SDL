@@ -34,6 +34,12 @@ bool Game::Init()
 			else
 			{
 				SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
+
+				if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+				{
+					std::cout << "SDL Image could not initialize!\n";
+					status = false;
+				}
 			}
 		}
 	}
@@ -56,6 +62,7 @@ void Game::Quit()
 		SDL_DestroyWindow(window);
 	if (renderer)
 		SDL_DestroyRenderer(renderer);
+	IMG_Quit();
 	SDL_Quit();
 }
 
