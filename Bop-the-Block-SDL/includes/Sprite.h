@@ -6,10 +6,12 @@
 class Sprite
 {
 public:
+	Sprite();
 	Sprite(int x, int y, int w, int h);
 	~Sprite();
 	bool Init(SDL_Renderer *renderer, std::string file_location);
 	SDL_Texture *GetTexture();
+	void SetDrawingArea(int x, int y, int w, int h);
 	SDL_Rect GetDrawingArea();
 
 private:
