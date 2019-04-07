@@ -2,6 +2,11 @@
 #include <SDL_image.h>
 #include <iostream>
 
+Sprite::Sprite()
+{
+	draw_area = { 0, 0, 0, 0 };
+}
+
 Sprite::Sprite(int x, int y, int w, int h)
 {
 	draw_area = { x, y, w, h };
@@ -37,6 +42,11 @@ bool Sprite::Init(SDL_Renderer *renderer, std::string file_location)
 SDL_Texture *Sprite::GetTexture()
 {
 	return texture;
+}
+
+void Sprite::SetDrawingArea(int x, int y, int w, int h)
+{
+	draw_area = { x, y, w, h };
 }
 
 SDL_Rect Sprite::GetDrawingArea()
