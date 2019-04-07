@@ -5,6 +5,10 @@
 class Entity
 {
 public:
+	bool IsOverlapping(SDL_Rect *collision_rect);
+	void SetPosition(int x, int y);
+	SDL_Rect GetPosition();
+
 	virtual void Update() = 0;
 	virtual void Draw(SDL_Renderer *renderer) = 0;
 
