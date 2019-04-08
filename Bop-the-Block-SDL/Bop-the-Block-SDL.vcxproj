@@ -152,6 +152,7 @@
     <ClCompile Include="Bop-the-Block-SDL.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\Game.h" />
+    <ClInclude Include="includes\Paddle.h" />
     <ClInclude Include="includes\Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
