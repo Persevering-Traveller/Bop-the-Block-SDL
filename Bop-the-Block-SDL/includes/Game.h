@@ -2,6 +2,7 @@
 #define GAME_H
 #include <SDL.h>
 #include <SDL_image.h>
+#include "Paddle.h"
 
 class Game
 {
@@ -22,6 +23,8 @@ private:
 	bool is_running;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
+
+	Paddle player;
 };
 
 #endif

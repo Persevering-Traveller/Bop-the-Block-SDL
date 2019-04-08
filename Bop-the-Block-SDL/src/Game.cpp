@@ -44,6 +44,18 @@ bool Game::Init()
 		}
 	}
 
+	if (!player.Init(renderer, "./data/sprites/paddle.png"))
+	{
+		std::cout << "Player could not initialize!\n";
+		status = false;
+	}
+	else
+	{
+		player.GetSprite()->SetDrawingArea(0, 0, 32, 16);
+		player.SetStartPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 100);
+		player.SetPosition(player.GetStartPosition().x, player.GetStartPosition().y);
+	}
+
 	return status;
 }
 
@@ -79,11 +91,15 @@ void Game::Update()
 				is_running = false;
 		}
 	}
+
+	player.Update();
 }
 
 void Game::Draw() 
 {
 	SDL_RenderClear(renderer);
-	// Cool draw code here
+
+	player.Draw(renderer);
+
 	SDL_RenderPresent(renderer);
 }
