@@ -1,10 +1,10 @@
-#Bop the Block
+# Bop the Block
 Bop the Block is a simple Arkanoid/Breakout clone heavily inspired by the GB classic: Alleyway. This project is being made in order to continuously familiarize myself with C++, as well as getting to know the SDL library for game creation.
 
-#Features
+## Features
 * Draws the player's paddle on screen
 
-#TODO
+## TODO
 * Add in player controls
 * Add in a GUI that displays points and balls left
 * Add collision checking that is able to tell which side the collision happened
