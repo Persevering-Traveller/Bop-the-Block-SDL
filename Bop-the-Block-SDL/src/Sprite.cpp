@@ -33,6 +33,7 @@ bool Sprite::Init(SDL_Renderer *renderer, std::string file_location)
 		if (!texture)
 		{
 			std::cout << file_location + " could not be turned into a texture!\nIMG Error: " + IMG_GetError() + "\n";
+			status = false;
 		}
 	}
 
