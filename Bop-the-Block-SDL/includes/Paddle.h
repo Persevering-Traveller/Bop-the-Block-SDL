@@ -10,7 +10,7 @@ public:
 	Paddle();
 	void Move(int x_direction);
 	void ChangeSpeed(SPEED which_speed);
-	void Update();
+	void Update(float delta_time);
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 private:
