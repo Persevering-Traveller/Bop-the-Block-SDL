@@ -14,7 +14,7 @@ Paddle::Paddle()
 void Paddle::Move(int x_direction)
 {
 	if (x_direction >= 1) this->x_direction = 1;
-	else if (x_direction <= 1) this->x_direction = -1;
+	else if (x_direction <= -1) this->x_direction = -1;
 	else this->x_direction = 0;
 }
 
@@ -29,9 +29,9 @@ void Paddle::ChangeSpeed(SPEED which_speed)
 	}
 }
 
-void Paddle::Update()
+void Paddle::Update(float delta_time)
 {
-	position.x += current_speed * x_direction; // * delta_time
+	position.x += current_speed * x_direction * delta_time;
 }
 
 void Paddle::Draw(SDL_Renderer *renderer)
