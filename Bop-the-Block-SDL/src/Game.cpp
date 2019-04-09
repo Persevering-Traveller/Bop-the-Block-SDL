@@ -4,6 +4,9 @@
 Game::Game()
 {
 	is_running = true;
+	scale = 3;
+
+	start_ticks = delta_time = 0;
 }
 
 bool Game::Init()
@@ -17,7 +20,7 @@ bool Game::Init()
 	}
 	else
 	{
-		window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DESIGN_WIDTH * scale, DESIGN_HEIGHT * scale, SDL_WINDOW_SHOWN);
 		if (!window)
 		{
 			std::cout << "A window could not be created!\n";
@@ -34,12 +37,16 @@ bool Game::Init()
 			else
 			{
 				SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
+				SDL_RenderSetLogicalSize(renderer, DESIGN_WIDTH, DESIGN_HEIGHT);
+				SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
 				if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 				{
 					std::cout << "SDL Image could not initialize!\n";
 					status = false;
 				}
+
+				
 			}
 		}
 	}
@@ -52,7 +59,7 @@ bool Game::Init()
 	else
 	{
 		player.GetSprite()->SetDrawingArea(0, 0, 32, 16);
-		player.SetStartPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 100);
+		player.SetStartPosition(DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50);
 		player.SetPosition(player.GetStartPosition().x, player.GetStartPosition().y);
 	}
 
@@ -78,6 +85,19 @@ void Game::Quit()
 	SDL_Quit();
 }
 
+void Game::HandleControls()
+{
+	const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
+
+	// Player controls
+	if (keyboard_state[SDL_SCANCODE_LEFT])
+		player.Move(-1);
+	else if (keyboard_state[SDL_SCANCODE_RIGHT])
+		player.Move(1);
+	else
+		player.Move(0);
+}
+
 void Game::Update()
 {
 	SDL_Event event;
@@ -91,8 +111,14 @@ void Game::Update()
 				is_running = false;
 		}
 	}
+	// Grab delta time so we don't shoot off into space
+	delta_time = (SDL_GetTicks() - start_ticks) / 1000.0f;
 
-	player.Update();
+	HandleControls();
+
+	player.Update(delta_time);
+
+	start_ticks = SDL_GetTicks();
 }
 
 void Game::Draw() 

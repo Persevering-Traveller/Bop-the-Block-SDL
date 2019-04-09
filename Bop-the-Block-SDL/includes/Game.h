@@ -13,16 +13,20 @@ public:
 	void Quit();
 
 private:
-	const int WINDOW_WIDTH = 640;
-	const int WINDOW_HEIGHT = 480;
+	const int DESIGN_WIDTH = 320;
+	const int DESIGN_HEIGHT = 240;
 	const char *WINDOW_NAME = "Bop the Block";
 
 	void Update();
 	void Draw();
+	void HandleControls();
 
 	bool is_running;
+	int scale;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
+
+	float start_ticks, delta_time;
 
 	Paddle player;
 };
