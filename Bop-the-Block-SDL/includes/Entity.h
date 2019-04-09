@@ -14,7 +14,7 @@ public:
 	Sprite *GetSprite();
 
 	
-	virtual void Update() = 0;
+	virtual void Update(float delta_time) = 0;
 	virtual void Draw(SDL_Renderer *renderer) = 0;
 	virtual void Reset() = 0;
 
