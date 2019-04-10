@@ -2,13 +2,10 @@
 
 Paddle::Paddle()
 {
-	low_speed = 3;
-	mid_speed = 4;
-	hi_speed = 5;
-
-	current_speed = mid_speed;
-
+	current_max_speed = SPEED::MID;
 	x_direction = 0;
+	velocity = 0.f;
+	x_position = 0.f;
 }
 
 void Paddle::Move(int x_direction)
@@ -20,18 +17,32 @@ void Paddle::Move(int x_direction)
 
 void Paddle::ChangeSpeed(SPEED which_speed)
 {
-	switch (which_speed)
-	{
-	case SPEED::LOW: current_speed = low_speed; break;
-	case SPEED::MID: current_speed = mid_speed; break;
-	case SPEED::HIGH: current_speed = hi_speed; break;
-	default: current_speed = mid_speed;
-	}
+	current_max_speed = which_speed;
 }
 
 void Paddle::Update(float delta_time)
 {
-	position.x += current_speed * x_direction * delta_time;
+	int max_speed;
+	switch (current_max_speed)
+	{
+		case SPEED::HIGH: max_speed = HI_SPEED; break;
+		case SPEED::MID: max_speed = MID_SPEED; break;
+		case SPEED::LOW: max_speed = LOW_SPEED; break;
+	}
+
+	if (x_direction == 0)
+		velocity = 0;
+	else
+	{
+		velocity += speed * x_direction;
+		// Cap speed based on which speed mode we're in
+		if (velocity >= max_speed)
+			velocity = max_speed;
+		else if (velocity <= -max_speed)
+			velocity = -max_speed;
+		x_position += velocity * delta_time;
+	}
+	position.x = (int)x_position;
 }
 
 void Paddle::Draw(SDL_Renderer *renderer)
@@ -41,7 +52,7 @@ void Paddle::Draw(SDL_Renderer *renderer)
 
 void Paddle::Reset()
 {
-	current_speed = mid_speed;
+	current_max_speed = SPEED::MID;
 	x_direction = 0;
 	position = start_position;
 }
