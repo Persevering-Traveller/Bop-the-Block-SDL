@@ -6,7 +6,7 @@ Game::Game()
 	is_running = true;
 	scale = 3;
 
-	start_ticks = delta_time = 0;
+	last_tick = 0;
 }
 
 bool Game::Init()
@@ -109,16 +109,27 @@ void Game::Update()
 		{
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				is_running = false;
+
+			if (event.key.keysym.sym == SDLK_z)
+				player.ChangeSpeed(SPEED::HIGH);
+			else if (event.key.keysym.sym == SDLK_x)
+				player.ChangeSpeed(SPEED::LOW);
+		}
+		if (event.type == SDL_KEYUP)
+		{
+			if (event.key.keysym.sym == SDLK_z || event.key.keysym.sym == SDLK_x)
+				player.ChangeSpeed(SPEED::MID);
 		}
 	}
 	// Grab delta time so we don't shoot off into space
-	delta_time = (SDL_GetTicks() - start_ticks) / 1000.0f;
+	float ticks = SDL_GetTicks();
+	float delta_time = (ticks - last_tick) / 1000.f;
 
 	HandleControls();
 
 	player.Update(delta_time);
 
-	start_ticks = SDL_GetTicks();
+	last_tick = ticks;
 }
 
 void Game::Draw() 
