@@ -26,7 +26,7 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	float start_ticks, delta_time;
+	float last_tick;
 
 	Paddle player;
 };
