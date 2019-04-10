@@ -14,9 +14,15 @@ public:
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 private:
-	int current_speed;
-	int low_speed, mid_speed, hi_speed;
+	const int speed = 3;
+	SPEED current_max_speed;
+	const int LOW_SPEED = 100;
+	const int MID_SPEED = 200;
+	const int HI_SPEED = 400;
+
 	int x_direction;
+	float x_position;
+	float velocity;
 };
 
 #endif
