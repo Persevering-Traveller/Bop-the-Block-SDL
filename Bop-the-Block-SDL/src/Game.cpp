@@ -45,22 +45,8 @@ bool Game::Init()
 					std::cout << "SDL Image could not initialize!\n";
 					status = false;
 				}
-
-				
 			}
 		}
-	}
-
-	if (!player.Init(renderer, "./data/sprites/paddle.png"))
-	{
-		std::cout << "Player could not initialize!\n";
-		status = false;
-	}
-	else
-	{
-		player.GetSprite()->SetDrawingArea(0, 0, 32, 16);
-		player.SetStartPosition(DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50);
-		player.SetPosition(player.GetStartPosition().x, player.GetStartPosition().y);
 	}
 
 	return status;
@@ -83,6 +69,19 @@ void Game::Quit()
 		SDL_DestroyRenderer(renderer);
 	IMG_Quit();
 	SDL_Quit();
+}
+
+bool Game::Setup()
+{
+	bool status = true;
+
+	if (!player.Init(renderer, "./data/sprites/paddle.png"))
+	{
+		std::cout << "Player could not initialize!\n";
+		status = false;
+	};
+
+	return status;
 }
 
 void Game::HandleControls()
@@ -121,11 +120,12 @@ void Game::Update()
 				player.ChangeSpeed(SPEED::MID);
 		}
 	}
+
+	HandleControls();
+
 	// Grab delta time so we don't shoot off into space
 	float ticks = SDL_GetTicks();
 	float delta_time = (ticks - last_tick) / 1000.f;
-
-	HandleControls();
 
 	player.Update(delta_time);
 
