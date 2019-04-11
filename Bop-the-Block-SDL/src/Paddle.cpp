@@ -1,11 +1,15 @@
 #include "Paddle.h"
 
-Paddle::Paddle()
+Paddle::Paddle(int start_x, int start_y, int x1_constraint, int x2_constraint)
 {
+	sprite.SetDrawingArea(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
+	position = start_position = { start_x, start_y, SPRITE_WIDTH, SPRITE_HEIGHT };
 	current_max_speed = SPEED::MID;
+	this->x1_constraint = x1_constraint;
+	this->x2_constraint = x2_constraint;
 	x_direction = 0;
 	velocity = 0.f;
-	x_position = 0.f;
+	x_position = position.x;
 }
 
 void Paddle::Move(int x_direction)
@@ -34,13 +38,25 @@ void Paddle::Update(float delta_time)
 		velocity = 0;
 	else
 	{
-		velocity += speed * x_direction;
+		velocity += MOVE_SPEED * x_direction;
 		// Cap speed based on which speed mode we're in
 		if (velocity >= max_speed)
 			velocity = max_speed;
 		else if (velocity <= -max_speed)
 			velocity = -max_speed;
 		x_position += velocity * delta_time;
+
+		// Constraint handling
+		if (x_position < x1_constraint)
+		{
+			x_position = x1_constraint;
+			velocity = 0;
+		}
+		else if (x_position > x2_constraint - SPRITE_WIDTH)
+		{
+			x_position = x2_constraint - SPRITE_WIDTH;
+			velocity = 0;
+		}
 	}
 	position.x = (int)x_position;
 }
@@ -54,5 +70,7 @@ void Paddle::Reset()
 {
 	current_max_speed = SPEED::MID;
 	x_direction = 0;
+	velocity = 0.f;
 	position = start_position;
+	x_position = position.x;
 }
