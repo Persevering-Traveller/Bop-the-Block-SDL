@@ -81,6 +81,12 @@ bool Game::Setup()
 		status = false;
 	};
 
+	if (!ball.Init(renderer, "./data/sprites/ball.png"))
+	{
+		std::cout << "Player could not initialize!\n";
+		status = false;
+	};
+
 	return status;
 }
 
@@ -128,6 +134,7 @@ void Game::Update()
 	float delta_time = (ticks - last_tick) / 1000.f;
 
 	player.Update(delta_time);
+	ball.Update(delta_time);
 
 	last_tick = ticks;
 }
@@ -137,6 +144,7 @@ void Game::Draw()
 	SDL_RenderClear(renderer);
 
 	player.Draw(renderer);
+	ball.Draw(renderer);
 
 	SDL_RenderPresent(renderer);
 }
