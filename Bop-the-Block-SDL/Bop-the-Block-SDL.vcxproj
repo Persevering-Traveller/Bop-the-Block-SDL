@@ -124,7 +124,7 @@
       <AdditionalIncludeDirectories>C:\Users\Traveller\Documents\Projects\VisualStudio\Bop-the-Block-SDL\Bop-the-Block-SDL\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bop-the-Block-SDL.cpp" />
+    <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
@@ -159,6 +160,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\Ball.h" />
     <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\Game.h" />
     <ClInclude Include="includes\Paddle.h" />
