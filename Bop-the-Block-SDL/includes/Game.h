@@ -9,6 +9,7 @@ class Game
 public:
 	Game();
 	bool Init();
+	bool Setup();
 	void Run();
 	void Quit();
 
@@ -28,7 +29,7 @@ private:
 
 	float last_tick;
 
-	Paddle player;
+	Paddle player{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50, 0, DESIGN_WIDTH };
 };
 
 #endif
