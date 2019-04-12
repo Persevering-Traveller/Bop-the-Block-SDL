@@ -6,7 +6,7 @@ class Entity
 {
 public:
 	bool Init(SDL_Renderer *renderer, std::string file_location);
-	bool IsOverlapping(SDL_Rect *collision_rect);
+	bool IsOverlapping(SDL_Rect *others_position);
 	void SetPosition(int x, int y);
 	SDL_Rect GetPosition();
 	void SetStartPosition(int x, int y);
@@ -14,7 +14,7 @@ public:
 	Sprite *GetSprite();
 
 	
-	virtual void Update(float delta_time) = 0;
+	virtual void Update() = 0;
 	virtual void Draw(SDL_Renderer *renderer) = 0;
 	virtual void Reset() = 0;
 
