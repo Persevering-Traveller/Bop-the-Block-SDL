@@ -11,7 +11,7 @@ public:
 	void Move(int x_direction);
 	void ChangeSpeed(SPEED which_speed);
 
-	void Update(float delta_time);
+	void Update();
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 
@@ -20,9 +20,9 @@ private:
 	const int SPRITE_HEIGHT = 16;
 
 	const int MOVE_SPEED = 3;
-	const int LOW_SPEED = 100;
-	const int MID_SPEED = 200;
-	const int HI_SPEED = 400;
+	const int LOW_SPEED = 1;
+	const int MID_SPEED = 2;
+	const int HI_SPEED = 4;
 
 	int x1_constraint, x2_constraint;
 
