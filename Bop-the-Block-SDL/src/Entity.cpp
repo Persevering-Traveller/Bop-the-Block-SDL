@@ -12,13 +12,13 @@ bool Entity::Init(SDL_Renderer *renderer, std::string file_location)
 	return status;
 }
 
-bool Entity::IsOverlapping(SDL_Rect *collision_rect)
+bool Entity::IsOverlapping(SDL_Rect *others_position)
 {
 	// Good old fashioned Bounding Box collision
-	if (position.x + position.w > collision_rect->x && position.y < collision_rect->y + collision_rect->h ||
-		position.x + position.w > collision_rect->x && position.y + position.h > collision_rect->y ||
-		position.x > collision_rect->x + collision_rect->w && position.y < collision_rect->y + collision_rect->h ||
-		position.x > collision_rect->x + collision_rect->w && position.y + position.h > collision_rect->y)
+	if (position.x + position.w > others_position->x &&
+		position.y + position.h > others_position->y &&
+		position.x < others_position->x + others_position->w && 
+		position.y < others_position->y + others_position->h)
 	{
 		return true;
 	}
