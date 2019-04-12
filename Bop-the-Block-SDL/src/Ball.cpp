@@ -14,7 +14,7 @@ Ball::Ball(int x, int y, SDL_Rect constraints)
 	y_direction = 1;
 }
 
-void Ball::Update(float delta_time)
+void Ball::Update()
 {
 	// Handle play area constraints
 	if (x_position <= constraints.x)
@@ -55,8 +55,8 @@ void Ball::Update(float delta_time)
 	else if (y_velocity <= -MAX_SPEED)
 		y_velocity = -MAX_SPEED;
 
-	x_position += x_velocity * delta_time;
-	y_position += y_velocity * delta_time;
+	x_position += x_velocity;
+	y_position += y_velocity;
 
 	position.x = (int)x_position;
 	position.y = (int)y_position;
@@ -75,4 +75,50 @@ void Ball::Reset()
 	y_position = position.y;
 	x_direction = 1;
 	y_direction = 1;
+}
+
+void Ball::HandleCollision(SDL_Rect *others_position)
+{
+	if (position.y > others_position->y && position.y < others_position->y + others_position->h &&
+		position.y + position.h > others_position->y &&  position.y + position.h < others_position->y + others_position->h)
+	{
+		// Left collision
+		if (position.x + position.w > others_position->x && 
+			position.x < others_position->x)
+		{
+			x_direction = -x_direction;
+			x_velocity = 0;
+			x_position = others_position->x - SPRITE_WIDTH;
+		}
+		// Right collision
+		else if (position.x < others_position->x + others_position->w && 
+			     position.x + position.w > others_position->x + others_position->w)
+		{
+			x_direction = -x_direction;
+			x_velocity = 0;
+			x_position = others_position->x + others_position->w;
+			
+		}
+	}
+	else if (position.x > others_position->x && position.x < others_position->x + others_position->w &&
+			 position.x + position.w > others_position->x && position.x + position.w < others_position->x + others_position->w)
+	{
+		// Top collision
+		if (position.y + position.h > others_position->y &&
+			position.y < others_position->y)
+		{
+			y_direction = -y_direction;
+			y_velocity = 0;
+			y_position = others_position->y - SPRITE_HEIGHT;
+			
+		}
+		// Bottom Collision
+		else if (position.y < others_position->y + others_position->h &&
+				 position.y + position.h > others_position->y + others_position->h)
+		{
+			y_direction = -y_direction;
+			y_velocity = 0;
+			y_position = others_position->y + others_position->h;
+		}
+	}
 }
