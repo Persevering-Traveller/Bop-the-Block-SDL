@@ -24,7 +24,7 @@ void Paddle::ChangeSpeed(SPEED which_speed)
 	current_max_speed = which_speed;
 }
 
-void Paddle::Update(float delta_time)
+void Paddle::Update()
 {
 	int max_speed;
 	switch (current_max_speed)
@@ -44,7 +44,7 @@ void Paddle::Update(float delta_time)
 			velocity = max_speed;
 		else if (velocity <= -max_speed)
 			velocity = -max_speed;
-		x_position += velocity * delta_time;
+		x_position += velocity;
 
 		// Constraint handling
 		if (x_position < x1_constraint)
