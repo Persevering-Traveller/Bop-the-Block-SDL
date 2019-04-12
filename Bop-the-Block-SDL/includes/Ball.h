@@ -7,16 +7,18 @@ class Ball : public Entity
 public:
 	Ball(int x, int y, SDL_Rect constraints);
 
-	void Update(float delta_time);
+	void Update();
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 
+	void HandleCollision(SDL_Rect *others_position);
+
 private:
-	const int SPRITE_WIDTH = 16;
-	const int SPRITE_HEIGHT = 16;
+	const int SPRITE_WIDTH = 8;
+	const int SPRITE_HEIGHT = 8;
 
 	const int SPEED = 3;
-	const int MAX_SPEED = 100;
+	const int MAX_SPEED = 2;
 
 	SDL_Rect constraints;
 	float x_velocity, y_velocity;
