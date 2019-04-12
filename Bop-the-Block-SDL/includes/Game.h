@@ -28,8 +28,6 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	float last_tick;
-
 	Paddle player{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50, 0, DESIGN_WIDTH };
 	Ball ball{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, DESIGN_WIDTH, DESIGN_HEIGHT } };
 };
