@@ -5,8 +5,6 @@ Game::Game()
 {
 	is_running = true;
 	scale = 3;
-
-	last_tick = 0;
 }
 
 bool Game::Init()
@@ -28,7 +26,7 @@ bool Game::Init()
 		}
 		else
 		{
-			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (!renderer)
 			{
 				std::cout << "Could not create the renderer!\n";
@@ -128,15 +126,13 @@ void Game::Update()
 	}
 
 	HandleControls();
+	
+	player.Update();
+	ball.Update();
 
-	// Grab delta time so we don't shoot off into space
-	float ticks = SDL_GetTicks();
-	float delta_time = (ticks - last_tick) / 1000.f;
-
-	player.Update(delta_time);
-	ball.Update(delta_time);
-
-	last_tick = ticks;
+	// Paddle Collision
+	if (ball.IsOverlapping(&player.GetPosition()))
+		ball.HandleCollision(&player.GetPosition());
 }
 
 void Game::Draw() 
