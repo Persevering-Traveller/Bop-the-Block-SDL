@@ -92,13 +92,15 @@ void Game::HandleControls()
 {
 	const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
 
+	int x_direction = 0;
+
 	// Player controls
 	if (keyboard_state[SDL_SCANCODE_LEFT])
-		player.Move(-1);
-	else if (keyboard_state[SDL_SCANCODE_RIGHT])
-		player.Move(1);
-	else
-		player.Move(0);
+		x_direction += -1;
+	if (keyboard_state[SDL_SCANCODE_RIGHT])
+		x_direction += 1;
+
+	player.Move(x_direction);
 }
 
 void Game::Update()
