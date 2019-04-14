@@ -132,7 +132,7 @@ void Game::Update()
 
 	// Paddle Collision
 	if (ball.IsOverlapping(&player.GetPosition()))
-		ball.HandleCollision(&player.GetPosition());
+		ball.HandleCollision(&player.GetPosition(), true);
 }
 
 void Game::Draw() 
