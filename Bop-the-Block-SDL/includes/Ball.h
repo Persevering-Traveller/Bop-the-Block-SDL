@@ -11,7 +11,7 @@ public:
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 
-	void HandleCollision(SDL_Rect *others_position);
+	void HandleCollision(SDL_Rect *others_position, bool against_paddle);
 
 private:
 	const int SPRITE_WIDTH = 8;
