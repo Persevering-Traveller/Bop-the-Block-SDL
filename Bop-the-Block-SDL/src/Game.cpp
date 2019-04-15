@@ -81,9 +81,16 @@ bool Game::Setup()
 
 	if (!ball.Init(renderer, "./data/sprites/ball.png"))
 	{
-		std::cout << "Player could not initialize!\n";
+		std::cout << "Ball could not initialize!\n";
 		status = false;
 	};
+
+	if (!block.Init(renderer, "./data/sprites/block.png"))
+	{
+		std::cout << "Block could not initialize!\n";
+		status = false;
+	};
+
 
 	return status;
 }
@@ -135,6 +142,12 @@ void Game::Update()
 	// Paddle Collision
 	if (ball.IsOverlapping(&player.GetPosition()))
 		ball.HandleCollision(&player.GetPosition(), true);
+	// Block Collision
+	if (ball.IsOverlapping(&block.GetPosition()))
+	{
+		ball.HandleCollision(&block.GetPosition(), false);
+		block.HandleCollision();
+	}
 }
 
 void Game::Draw() 
@@ -142,6 +155,7 @@ void Game::Draw()
 	SDL_RenderClear(renderer);
 
 	player.Draw(renderer);
+	block.Draw(renderer);
 	ball.Draw(renderer);
 
 	SDL_RenderPresent(renderer);
