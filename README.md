@@ -4,11 +4,11 @@ Bop the Block is a simple Arkanoid/Breakout clone heavily inspired by the GB cla
 ## Features
 * Player paddle can move back and forth in 3 speeds
 * Ball that bounces within the screen boundaries
+* Collision checking that is able to tell which side the collision happened
+* Ball collides with paddle and blocks
 
 ## TODO
 * Add in a GUI that displays points and balls left
-* Add collision checking that is able to tell which side the collision happened
-* Add ball collisions with paddle and blocks
 * Add sound effects for different collisions and death
 * Add in some background music
 * Read from a file that keeps level details
