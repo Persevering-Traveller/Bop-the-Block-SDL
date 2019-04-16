@@ -43,6 +43,11 @@ bool Game::Init()
 					std::cout << "SDL Image could not initialize!\n";
 					status = false;
 				}
+
+				if (!TTF_Init() == -1)
+				{
+					std::cout << "SDL TTF could not initialize!\n";
+				}
 			}
 		}
 	}
@@ -65,6 +70,10 @@ void Game::Quit()
 		SDL_DestroyWindow(window);
 	if (renderer)
 		SDL_DestroyRenderer(renderer);
+
+	gui.Quit();
+
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -91,6 +100,11 @@ bool Game::Setup()
 		status = false;
 	};
 
+	if (!gui.Init(renderer, "./data/font/font.ttf"))
+	{
+		std::cout << "GUI could not initialize!\n";
+		status = false;
+	}
 
 	return status;
 }
@@ -148,12 +162,15 @@ void Game::Update()
 		ball.HandleCollision(&block.GetPosition(), false);
 		block.HandleCollision();
 	}
+
+	gui.Update(renderer, 0, 0, 1, 3);
 }
 
 void Game::Draw() 
 {
 	SDL_RenderClear(renderer);
 
+	gui.Draw(renderer);
 	player.Draw(renderer);
 	block.Draw(renderer);
 	ball.Draw(renderer);
