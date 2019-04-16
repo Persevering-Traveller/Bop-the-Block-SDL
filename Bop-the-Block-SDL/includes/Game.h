@@ -2,9 +2,11 @@
 #define GAME_H
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Paddle.h"
 #include "Ball.h"
 #include "Block.h"
+#include "GUI.h"
 
 class Game
 {
@@ -32,6 +34,8 @@ private:
 	Paddle player{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50, 0, DESIGN_WIDTH };
 	Ball ball{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, DESIGN_WIDTH, DESIGN_HEIGHT } };
 	Block block{ DESIGN_WIDTH / 2, DESIGN_HEIGHT / 2 };
+
+	GUI gui;
 };
 
 #endif
