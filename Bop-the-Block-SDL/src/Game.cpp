@@ -5,6 +5,8 @@ Game::Game()
 {
 	is_running = true;
 	scale = 3;
+
+	top_score = score = 0;
 }
 
 bool Game::Init()
@@ -72,6 +74,7 @@ void Game::Quit()
 		SDL_DestroyRenderer(renderer);
 
 	gui.Quit();
+	highscore_file_stream.close();
 
 	TTF_Quit();
 	IMG_Quit();
@@ -104,6 +107,24 @@ bool Game::Setup()
 	{
 		std::cout << "GUI could not initialize!\n";
 		status = false;
+	}
+
+	// Read the Highscore data file
+	highscore_file_stream.open(HIGHSCORE_FILE, std::fstream::in);
+	if (!highscore_file_stream.is_open())
+	{
+		// If the file doesn't exist yet, create it
+		highscore_file_stream.open(HIGHSCORE_FILE, std::fstream::out);
+		highscore_file_stream.close();
+	}
+	else
+	{
+		// Read the high score from a previous session
+		std::string scoreboard;
+		highscore_file_stream >> scoreboard;
+		top_score = std::atoi(scoreboard.c_str());
+
+		highscore_file_stream.close();
 	}
 
 	return status;
@@ -161,9 +182,20 @@ void Game::Update()
 	{
 		ball.HandleCollision(&block.GetPosition(), false);
 		block.HandleCollision();
+		score+=22;
 	}
 
-	gui.Update(renderer, 0, 0, 1, 3);
+	// Assign top score
+	if (score > top_score)
+	{
+		top_score = score;
+		// Write the new high score everytime it changes
+		highscore_file_stream.open(HIGHSCORE_FILE, std::fstream::out | std::fstream::trunc);
+		highscore_file_stream << std::to_string(top_score);
+		highscore_file_stream.close();
+	}
+
+	gui.Update(renderer, top_score, score, 1, 3);
 }
 
 void Game::Draw() 
