@@ -8,6 +8,8 @@
 #include "Block.h"
 #include "GUI.h"
 
+#include<fstream>
+
 class Game
 {
 public:
@@ -22,6 +24,8 @@ private:
 	const int DESIGN_HEIGHT = 240;
 	const char *WINDOW_NAME = "Bop the Block";
 
+	const int PLAY_AREA_WIDTH = DESIGN_WIDTH - 100;
+
 	void Update();
 	void Draw();
 	void HandleControls();
@@ -31,11 +35,15 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	Paddle player{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 50, 0, DESIGN_WIDTH };
-	Ball ball{ DESIGN_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, DESIGN_WIDTH, DESIGN_HEIGHT } };
-	Block block{ DESIGN_WIDTH / 2, DESIGN_HEIGHT / 2 };
+	Paddle player{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT - 50, 0, PLAY_AREA_WIDTH };
+	Ball ball{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, PLAY_AREA_WIDTH, DESIGN_HEIGHT } };
+	Block block{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT / 2 };
 
 	GUI gui;
+
+	const std::string HIGHSCORE_FILE = "./data/highscore.dat";
+	std::fstream highscore_file_stream;
+	int score, top_score;
 };
 
 #endif
