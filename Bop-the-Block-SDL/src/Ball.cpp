@@ -79,49 +79,42 @@ void Ball::Reset()
 
 void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
 {
-	if (position.y >= others_position->y && position.y <= others_position->y + others_position->h &&
-		position.y + position.h >= others_position->y &&  position.y + position.h <= others_position->y + others_position->h)
+	// Our bottom overlapping their top
+	if (position.y + position.h >= others_position->y && position.y < others_position->y)
 	{
-		x_direction = -x_direction;
-		x_velocity = 0;
-
-		// The game wouldn't be very fun if it hit the side and didn't go back up...
+		y_direction = -y_direction;
+		y_velocity = 0;
+		y_position = others_position->y - SPRITE_HEIGHT;
+	}
+	// Our top overlapping their bottom
+	else if (position.y <= others_position->y + others_position->h && position.y + position.h > others_position->y + others_position->h)
+	{
+		y_direction = -y_direction;
+		y_velocity = 0;
+		y_position = others_position->y + others_position->h;
+	}
+	// Our right overlapping their left
+	if (position.x + position.w >= others_position->x && position.x < others_position->x)
+	{
 		if (against_paddle)
 		{
 			y_direction = -y_direction;
 			y_velocity = 0;
 		}
-
-		// Left collision
-		if (position.x + position.w >= others_position->x && 
-			position.x <= others_position->x)
-		{
-			x_position = others_position->x - SPRITE_WIDTH;
-		}
-		// Right collision
-		else if (position.x <= others_position->x + others_position->w && 
-			     position.x + position.w >= others_position->x + others_position->w)
-		{
-			x_position = others_position->x + others_position->w;
-		}
+		x_direction = -x_direction;
+		x_velocity = 0;
+		x_position = others_position->x - SPRITE_WIDTH;
 	}
-	else if (position.x >= others_position->x && position.x <= others_position->x + others_position->w &&
-			 position.x + position.w >= others_position->x && position.x + position.w <= others_position->x + others_position->w)
+	// Our Left overlapping their right
+	else if (position.x <= others_position->x + others_position->w && position.x + position.w > others_position->x + others_position->w)
 	{
-		y_direction = -y_direction;
-		y_velocity = 0;
-
-		// Top collision
-		if (position.y + position.h >= others_position->y &&
-			position.y <= others_position->y)
+		if (against_paddle)
 		{
-			y_position = others_position->y - SPRITE_HEIGHT;
+			y_direction = -y_direction;
+			y_velocity = 0;
 		}
-		// Bottom Collision
-		else if (position.y <= others_position->y + others_position->h &&
-			     position.y + position.h >= others_position->y + others_position->h)
-		{
-			y_position = others_position->y + others_position->h;
-		}
+		x_direction = -x_direction;
+		x_velocity = 0;
+		x_position = others_position->x + others_position->w;
 	}
 }
