@@ -12,6 +12,8 @@
 
 class Game
 {
+	enum class State { START, PLAY, PAUSE, GAME_OVER };
+
 public:
 	Game();
 	bool Init();
