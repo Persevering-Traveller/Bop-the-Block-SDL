@@ -47,6 +47,7 @@ private:
 	const std::string HIGHSCORE_FILE = "./data/highscore.dat";
 	std::fstream highscore_file_stream;
 	int score, top_score;
+	int ball_count;
 };
 
 #endif
