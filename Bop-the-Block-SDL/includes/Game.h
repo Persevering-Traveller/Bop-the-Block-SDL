@@ -33,6 +33,7 @@ private:
 	void HandleControls();
 
 	bool is_running;
+	State current_state;
 	int scale;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
