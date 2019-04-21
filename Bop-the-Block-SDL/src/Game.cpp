@@ -184,7 +184,7 @@ void Game::Update()
 	{
 		ball.HandleCollision(&block.GetPosition(), false);
 		block.HandleCollision();
-		score+=22;
+		score+=1;
 	}
 
 	// Assign top score
