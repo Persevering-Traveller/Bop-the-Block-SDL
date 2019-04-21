@@ -7,6 +7,7 @@ Game::Game()
 	scale = 3;
 
 	top_score = score = 0;
+	ball_count = 3;
 	// For now until we create a Start Screen
 	current_state = Game::State::PLAY;
 }
@@ -202,7 +203,7 @@ void Game::Update()
 			highscore_file_stream.close();
 		}
 
-		gui.Update(renderer, top_score, score, 1, 3);
+		gui.Update(renderer, top_score, score, 1, ball_count);
 	}
 }
 
