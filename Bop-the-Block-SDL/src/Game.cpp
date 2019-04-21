@@ -157,7 +157,10 @@ void Game::Update()
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_ESCAPE)
-				is_running = false;
+				if (current_state == Game::State::PLAY)
+					current_state = Game::State::PAUSE;
+				else if (current_state == Game::State::PAUSE)
+					current_state = Game::State::PLAY;
 
 			if (event.key.keysym.sym == SDLK_z)
 				player.ChangeSpeed(SPEED::HIGH);
@@ -171,33 +174,36 @@ void Game::Update()
 		}
 	}
 
-	HandleControls();
-	
-	player.Update();
-	ball.Update();
-
-	// Paddle Collision
-	if (ball.IsOverlapping(&player.GetPosition()))
-		ball.HandleCollision(&player.GetPosition(), true);
-	// Block Collision
-	if (ball.IsOverlapping(&block.GetPosition()))
+	if (current_state == Game::State::PLAY)
 	{
-		ball.HandleCollision(&block.GetPosition(), false);
-		block.HandleCollision();
-		score+=1;
-	}
+		HandleControls();
 
-	// Assign top score
-	if (score > top_score)
-	{
-		top_score = score;
-		// Write the new high score everytime it changes
-		highscore_file_stream.open(HIGHSCORE_FILE, std::fstream::out | std::fstream::trunc);
-		highscore_file_stream << std::to_string(top_score);
-		highscore_file_stream.close();
-	}
+		player.Update();
+		ball.Update();
 
-	gui.Update(renderer, top_score, score, 1, 3);
+		// Paddle Collision
+		if (ball.IsOverlapping(&player.GetPosition()))
+			ball.HandleCollision(&player.GetPosition(), true);
+		// Block Collision
+		if (ball.IsOverlapping(&block.GetPosition()))
+		{
+			ball.HandleCollision(&block.GetPosition(), false);
+			block.HandleCollision();
+			score += 1;
+		}
+
+		// Assign top score
+		if (score > top_score)
+		{
+			top_score = score;
+			// Write the new high score everytime it changes
+			highscore_file_stream.open(HIGHSCORE_FILE, std::fstream::out | std::fstream::trunc);
+			highscore_file_stream << std::to_string(top_score);
+			highscore_file_stream.close();
+		}
+
+		gui.Update(renderer, top_score, score, 1, 3);
+	}
 }
 
 void Game::Draw() 
