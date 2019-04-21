@@ -7,6 +7,8 @@ Game::Game()
 	scale = 3;
 
 	top_score = score = 0;
+	// For now until we create a Start Screen
+	current_state = Game::State::PLAY;
 }
 
 bool Game::Init()
