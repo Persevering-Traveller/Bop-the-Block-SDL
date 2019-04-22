@@ -77,7 +77,6 @@ void Game::Quit()
 		SDL_DestroyRenderer(renderer);
 
 	gui.Quit();
-	highscore_file_stream.close();
 
 	TTF_Quit();
 	IMG_Quit();
