@@ -1,6 +1,6 @@
 #include "GUI.h"
 
-bool GUI::Init(SDL_Renderer *renderer, std::string file_location)
+bool GUI::InitFont(SDL_Renderer *renderer, std::string file_location)
 {
 	bool status = true;
 
@@ -38,6 +38,19 @@ bool GUI::Init(SDL_Renderer *renderer, std::string file_location)
 	return status;
 }
 
+bool GUI::InitStartLogo(SDL_Renderer *renderer, std::string file_location)
+{
+	bool status = true;
+
+	if (!start_screen_logo.Init(renderer, file_location))
+	{
+		printf("Could not initialize start screen logo's sprite!\n");
+		status = false;
+	}
+
+	return status;
+}
+
 void GUI::Update(SDL_Renderer *renderer, int top, int score, int stage, int balls)
 {
 	if (top_score_prev != top)
@@ -65,12 +78,25 @@ void GUI::Update(SDL_Renderer *renderer, int top, int score, int stage, int ball
 	}
 }
 
-void GUI::Draw(SDL_Renderer *renderer)
+void GUI::DrawStart(SDL_Renderer *renderer)
+{
+	SDL_RenderCopy(renderer,
+		start_screen_logo.GetTexture(),
+		&start_screen_logo.GetDrawingArea(),
+		&START_LOGO_POSITION);
+}
+
+void GUI::DrawGameplay(SDL_Renderer *renderer)
 {
 	top_score_text.Draw(renderer);
 	score_text.Draw(renderer);
 	stage_text.Draw(renderer);
-	balls_text.Draw(renderer);;
+	balls_text.Draw(renderer);
+}
+
+void GUI::DrawGameOver(SDL_Renderer *renderer)
+{
+
 }
 
 void GUI::Quit()
