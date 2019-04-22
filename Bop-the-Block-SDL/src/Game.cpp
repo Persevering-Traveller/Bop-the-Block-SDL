@@ -8,8 +8,7 @@ Game::Game()
 
 	top_score = score = 0;
 	ball_count = 3;
-	// For now until we create a Start Screen
-	current_state = Game::State::PLAY;
+	current_state = Game::State::START;
 }
 
 bool Game::Init()
@@ -105,9 +104,15 @@ bool Game::Setup()
 		status = false;
 	};
 
-	if (!gui.Init(renderer, "./data/font/font.ttf"))
+	if (!gui.InitFont(renderer, "./data/font/font.ttf"))
 	{
-		std::cout << "GUI could not initialize!\n";
+		std::cout << "GUI font could not initialize!\n";
+		status = false;
+	}
+
+	if (!gui.InitStartLogo(renderer, "./data/sprites/logo.png"))
+	{
+		std::cout << "Start Screen Logo could not initialize!\n";
 		status = false;
 	}
 
@@ -157,10 +162,20 @@ void Game::Update()
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
 				if (current_state == Game::State::PLAY)
 					current_state = Game::State::PAUSE;
 				else if (current_state == Game::State::PAUSE)
 					current_state = Game::State::PLAY;
+				else if (current_state == Game::State::START)
+					is_running = false;
+			}
+
+			if (event.key.keysym.sym == SDLK_RETURN)
+			{
+				if (current_state == Game::State::START)
+					current_state = Game::State::PLAY;
+			}
 
 			if (event.key.keysym.sym == SDLK_z)
 				player.ChangeSpeed(SPEED::HIGH);
@@ -210,10 +225,22 @@ void Game::Draw()
 {
 	SDL_RenderClear(renderer);
 
-	gui.Draw(renderer);
-	player.Draw(renderer);
-	block.Draw(renderer);
-	ball.Draw(renderer);
+	switch(current_state)
+	{
+	case Game::State::START:
+		gui.DrawStart(renderer);
+		break;
+	case Game::State::PAUSE:
+	case Game::State::PLAY:
+		gui.DrawGameplay(renderer);
+		player.Draw(renderer);
+		block.Draw(renderer);
+		ball.Draw(renderer);
+		break;
+	case Game::State::GAME_OVER:
+		gui.DrawGameOver(renderer);
+		break;
+	}
 
 	SDL_RenderPresent(renderer);
 }
