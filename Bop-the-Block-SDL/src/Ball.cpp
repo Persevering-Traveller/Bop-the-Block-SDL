@@ -12,6 +12,7 @@ Ball::Ball(int x, int y, SDL_Rect constraints)
 	// the bottom right, towards the paddle
 	x_direction = 1;
 	y_direction = 1;
+	already_dead = false;
 }
 
 void Ball::Update()
@@ -40,6 +41,7 @@ void Ball::Update()
 	{
 		y_direction = 0;
 		y_velocity = 0;
+		already_dead = true;
 	}
 
 	x_velocity += SPEED * x_direction;
@@ -75,6 +77,7 @@ void Ball::Reset()
 	y_position = position.y;
 	x_direction = 1;
 	y_direction = 1;
+	already_dead = false;
 }
 
 void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
@@ -117,4 +120,9 @@ void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
 		x_velocity = 0;
 		x_position = others_position->x + others_position->w;
 	}
+}
+
+bool Ball::IsAlreadyDead()
+{
+	return already_dead;
 }
