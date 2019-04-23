@@ -12,6 +12,7 @@ public:
 	void Reset();
 
 	void HandleCollision(SDL_Rect *others_position, bool against_paddle);
+	bool IsAlreadyDead();
 
 private:
 	const int SPRITE_WIDTH = 8;
@@ -24,5 +25,7 @@ private:
 	float x_velocity, y_velocity;
 	float x_position, y_position;
 	float x_direction, y_direction;
+
+	bool already_dead;
 };
 #endif
