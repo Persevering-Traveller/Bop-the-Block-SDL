@@ -35,6 +35,12 @@ bool GUI::InitFont(SDL_Renderer *renderer, std::string file_location)
 		status = false;
 	}
 
+	if (!game_over_text.Setup(renderer, gui_font))
+	{
+		printf("Could not setup Game Over text!\n");
+		status = false;
+	}
+
 	return status;
 }
 
@@ -96,7 +102,7 @@ void GUI::DrawGameplay(SDL_Renderer *renderer)
 
 void GUI::DrawGameOver(SDL_Renderer *renderer)
 {
-
+	game_over_text.Draw(renderer);
 }
 
 void GUI::Quit()
@@ -105,4 +111,5 @@ void GUI::Quit()
 	score_text.Quit();
 	stage_text.Quit();
 	balls_text.Quit();
+	game_over_text.Quit();
 }
