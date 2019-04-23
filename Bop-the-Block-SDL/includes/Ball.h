@@ -11,6 +11,7 @@ public:
 	void Draw(SDL_Renderer *renderer);
 	void Reset();
 
+	void ResetBallPosition(int ball_x_position);
 	void HandleCollision(SDL_Rect *others_position, bool against_paddle);
 	bool IsAlreadyDead();
 
