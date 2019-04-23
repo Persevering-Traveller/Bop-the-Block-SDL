@@ -35,11 +35,11 @@ void Ball::Update()
 		y_velocity = 0;
 		y_position = constraints.y;
 	}
-	else if (y_position + SPRITE_HEIGHT >= constraints.h)
+	// If off the bottom of the screen, just stop, that ball is dead
+	else if (y_position > constraints.h)
 	{
-		y_direction = -y_direction;
+		y_direction = 0;
 		y_velocity = 0;
-		y_position = constraints.h - SPRITE_HEIGHT;
 	}
 
 	x_velocity += SPEED * x_direction;
