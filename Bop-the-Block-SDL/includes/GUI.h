@@ -27,11 +27,17 @@ private:
 	const int LOGO_WIDTH = 148;
 	const int LOGO_HEIGHT = 93;
 	const SDL_Rect START_LOGO_POSITION{ 90, 40, LOGO_WIDTH, LOGO_HEIGHT };
+	
+	const int GAME_OVER_X = 10;
+	const int GAME_OVER_Y = 100;
+	const int GAME_OVER_W = 300;
+	const int GAME_OVER_H = 20;
 
 	const std::string TOP_SCORE_LABEL = "TOP\n";
 	const std::string SCORE_LABEL = "SCORE\n";
 	const std::string STAGE_LABEL = "STAGE\n";
 	const std::string BALLS_LABEL = "x ";
+	const std::string GAME_OVER_LABEL = "G  A  M  E    O  V  E  R";
 
 	// Yay, no need for a default constructor!
 	int top_score_prev = 0;
@@ -46,5 +52,6 @@ private:
 	Text score_text{ SCORE_LABEL + std::to_string(score_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET, TEXT_WIDTH, TEXT_HEIGHT };
 	Text stage_text{ STAGE_LABEL + std::to_string(stage_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET * 2, TEXT_WIDTH, TEXT_HEIGHT };
 	Text balls_text{ BALLS_LABEL + std::to_string(balls_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET * 3, TEXT_WIDTH/2, TEXT_HEIGHT };
+	Text game_over_text{ GAME_OVER_LABEL, GAME_OVER_X, GAME_OVER_Y, GAME_OVER_W, GAME_OVER_H };
 };
 #endif
