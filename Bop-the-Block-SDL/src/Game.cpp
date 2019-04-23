@@ -178,7 +178,12 @@ void Game::Update()
 			}
 
 			if (event.key.keysym.sym == SDLK_z)
+			{
+				if (ball.IsAlreadyDead())
+					ball.ResetBallPosition(player.GetPosition().x);
+
 				player.ChangeSpeed(SPEED::HIGH);
+			}
 			else if (event.key.keysym.sym == SDLK_x)
 				player.ChangeSpeed(SPEED::LOW);
 		}
