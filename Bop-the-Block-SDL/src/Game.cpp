@@ -225,6 +225,9 @@ void Game::Update()
 		if (ball.GetPosition().y > DESIGN_HEIGHT && !ball.IsAlreadyDead())
 			ball_count--;
 
+		if (ball_count < 1)
+			current_state = Game::State::GAME_OVER;
+
 		gui.Update(renderer, top_score, score, 1, ball_count);
 	}
 }
