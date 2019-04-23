@@ -71,13 +71,26 @@ void Ball::Draw(SDL_Renderer *renderer)
 
 void Ball::Reset()
 {
-	position = start_position;
 	x_velocity = y_velocity = 0;
 	x_position = position.x;
 	y_position = position.y;
 	x_direction = 1;
 	y_direction = 1;
 	already_dead = false;
+}
+
+void Ball::ResetBallPosition(int paddle_x_position)
+{
+	int ball_offset = -5;
+	if (paddle_x_position + ball_offset < 0)
+		ball_offset = 0;
+
+	position = { paddle_x_position + ball_offset,
+		start_position.y,
+		start_position.w,
+		start_position.h };
+
+	Reset();
 }
 
 void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
