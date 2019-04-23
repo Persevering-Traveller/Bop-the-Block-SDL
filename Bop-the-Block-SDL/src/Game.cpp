@@ -217,6 +217,9 @@ void Game::Update()
 			highscore_file_stream.close();
 		}
 
+		if (ball.GetPosition().y > DESIGN_HEIGHT && !ball.IsAlreadyDead())
+			ball_count--;
+
 		gui.Update(renderer, top_score, score, 1, ball_count);
 	}
 }
