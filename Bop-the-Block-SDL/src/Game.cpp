@@ -167,7 +167,7 @@ void Game::Update()
 					current_state = Game::State::PAUSE;
 				else if (current_state == Game::State::PAUSE)
 					current_state = Game::State::PLAY;
-				else if (current_state == Game::State::START)
+				else if (current_state == Game::State::START || current_state == Game::State::GAME_OVER)
 					is_running = false;
 			}
 
@@ -175,6 +175,9 @@ void Game::Update()
 			{
 				if (current_state == Game::State::START)
 					current_state = Game::State::PLAY;
+
+				if (current_state == Game::State::GAME_OVER)
+					Reset();
 			}
 
 			if (event.key.keysym.sym == SDLK_z)
@@ -254,4 +257,13 @@ void Game::Draw()
 	}
 
 	SDL_RenderPresent(renderer);
+}
+
+void Game::Reset()
+{
+	score = 0;
+	ball_count = 3;
+	current_state = Game::State::START;
+	ball.Reset();
+	player.Reset();
 }
