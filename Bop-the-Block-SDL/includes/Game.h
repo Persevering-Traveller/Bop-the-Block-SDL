@@ -30,6 +30,7 @@ private:
 
 	void Update();
 	void Draw();
+	void Reset();
 	void HandleControls();
 
 	bool is_running;
