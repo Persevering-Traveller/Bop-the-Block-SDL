@@ -17,7 +17,7 @@ public:
 
 private:
 	const int SPRITE_WIDTH = 32;
-	const int SPRITE_HEIGHT = 16;
+	const int SPRITE_HEIGHT = 8;
 
 	const int MOVE_SPEED = 3;
 	const int LOW_SPEED = 1;
