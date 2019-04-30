@@ -1,8 +1,8 @@
 #include "Block.h"
 
-Block::Block(int x, int y)
+Block::Block()
 {
-	position = start_position = { x, y, SPRITE_WIDTH, SPRITE_HEIGHT };
+	position = start_position = { -SPRITE_WIDTH, -SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT };
 	sprite.SetDrawingArea(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
 	alive = true;
 }

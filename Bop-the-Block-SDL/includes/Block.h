@@ -5,7 +5,7 @@
 class Block : public Entity
 {
 public:
-	Block(int x, int y);
+	Block();
 	int GetPointValue();
 	void SetPointValue(int value);
 	void HandleCollision();
