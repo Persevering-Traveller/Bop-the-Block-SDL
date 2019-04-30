@@ -5,7 +5,7 @@
 #include <SDL_ttf.h>
 #include "Paddle.h"
 #include "Ball.h"
-#include "Block.h"
+#include "LevelBuilder.h"
 #include "GUI.h"
 
 #include<fstream>
@@ -26,7 +26,7 @@ private:
 	const int DESIGN_HEIGHT = 240;
 	const char *WINDOW_NAME = "Bop the Block";
 
-	const int PLAY_AREA_WIDTH = DESIGN_WIDTH - 100;
+	const int PLAY_AREA_WIDTH = DESIGN_WIDTH - 96;
 
 	void Update();
 	void Draw();
@@ -41,7 +41,7 @@ private:
 
 	Paddle player{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT - 50, 0, PLAY_AREA_WIDTH };
 	Ball ball{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, PLAY_AREA_WIDTH, DESIGN_HEIGHT } };
-	Block block{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT / 2 };
+	LevelBuilder level_builder;
 
 	GUI gui;
 
