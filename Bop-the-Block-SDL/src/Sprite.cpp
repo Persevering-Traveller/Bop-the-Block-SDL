@@ -45,6 +45,11 @@ SDL_Texture *Sprite::GetTexture()
 	return texture;
 }
 
+void Sprite::SetTexture(SDL_Texture *texture)
+{
+	this->texture = texture;
+}
+
 void Sprite::SetDrawingArea(int x, int y, int w, int h)
 {
 	draw_area = { x, y, w, h };
