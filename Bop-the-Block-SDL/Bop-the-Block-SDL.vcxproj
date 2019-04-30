@@ -155,6 +155,7 @@
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GUI.cpp" />
+    <ClCompile Include="src\LevelBuilder.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\Text.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\Game.h" />
     <ClInclude Include="includes\GUI.h" />
+    <ClInclude Include="includes\LevelBuilder.h" />
     <ClInclude Include="includes\Paddle.h" />
     <ClInclude Include="includes\Sprite.h" />
     <ClInclude Include="includes\Text.h" />

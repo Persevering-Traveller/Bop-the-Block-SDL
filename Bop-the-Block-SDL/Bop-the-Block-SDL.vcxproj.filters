@@ -42,6 +42,9 @@
     <ClCompile Include="src\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\LevelBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\LevelBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
