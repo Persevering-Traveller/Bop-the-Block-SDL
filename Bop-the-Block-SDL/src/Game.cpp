@@ -98,11 +98,13 @@ bool Game::Setup()
 		status = false;
 	};
 
-	if (!block.Init(renderer, "./data/sprites/block.png"))
+	if (!level_builder.Init(renderer, "./data/sprites/block.png"))
 	{
-		std::cout << "Block could not initialize!\n";
+		std::cout << "Level Builder could not initialize!\n";
 		status = false;
 	};
+
+	level_builder.SetupLevel("./data/levels/level1.dat");
 
 	if (!gui.InitFont(renderer, "./data/font/font.ttf"))
 	{
@@ -208,13 +210,19 @@ void Game::Update()
 		if (ball.IsOverlapping(&player.GetPosition()))
 			ball.HandleCollision(&player.GetPosition(), true);
 		// Block Collision
-		if (ball.IsOverlapping(&block.GetPosition()))
+		for (int i = 0; i < level_builder.MAX_VERTICAL_BLOCKS; i++)
 		{
-			ball.HandleCollision(&block.GetPosition(), false);
-			block.HandleCollision();
-			score += 1;
+			for (int j = 0; j < level_builder.MAX_HORIZONTAL_BLOCKS; j++)
+			{
+				if (ball.IsOverlapping(&level_builder.GetBlockAt(i, j)->GetPosition()))
+				{
+					ball.HandleCollision(&level_builder.GetBlockAt(i, j)->GetPosition(), false);
+					level_builder.GetBlockAt(i, j)->HandleCollision();
+					score += 1;
+				}
+			}
 		}
-
+		
 		// Assign top score
 		if (score > top_score)
 		{
@@ -248,7 +256,7 @@ void Game::Draw()
 	case Game::State::PLAY:
 		gui.DrawGameplay(renderer);
 		player.Draw(renderer);
-		block.Draw(renderer);
+		level_builder.Draw(renderer);
 		ball.Draw(renderer);
 		break;
 	case Game::State::GAME_OVER:
