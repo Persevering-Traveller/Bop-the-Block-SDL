@@ -38,7 +38,7 @@ bool Game::Init()
 			}
 			else
 			{
-				SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				SDL_RenderSetLogicalSize(renderer, DESIGN_WIDTH, DESIGN_HEIGHT);
 				SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
