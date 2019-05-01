@@ -272,6 +272,7 @@ void Game::Reset()
 	score = 0;
 	ball_count = 3;
 	current_state = Game::State::START;
+	level_builder.Reset();
 	ball.Reset();
 	player.Reset();
 }
