@@ -95,20 +95,6 @@ void Ball::ResetBallPosition(int paddle_x_position)
 
 void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
 {
-	// Our bottom overlapping their top
-	if (position.y + position.h >= others_position->y && position.y < others_position->y)
-	{
-		y_direction = -y_direction;
-		y_velocity = 0;
-		y_position = others_position->y - SPRITE_HEIGHT;
-	}
-	// Our top overlapping their bottom
-	else if (position.y <= others_position->y + others_position->h && position.y + position.h > others_position->y + others_position->h)
-	{
-		y_direction = -y_direction;
-		y_velocity = 0;
-		y_position = others_position->y + others_position->h;
-	}
 	// Our right overlapping their left
 	if (position.x + position.w >= others_position->x && position.x < others_position->x)
 	{
@@ -133,6 +119,21 @@ void Ball::HandleCollision(SDL_Rect *others_position, bool against_paddle)
 		x_velocity = 0;
 		x_position = others_position->x + others_position->w;
 	}
+	// Our bottom overlapping their top
+	else if (position.y + position.h >= others_position->y && position.y < others_position->y)
+	{
+		y_direction = -y_direction;
+		y_velocity = 0;
+		y_position = others_position->y - SPRITE_HEIGHT;
+	}
+	// Our top overlapping their bottom
+	else if (position.y <= others_position->y + others_position->h && position.y + position.h > others_position->y + others_position->h)
+	{
+		y_direction = -y_direction;
+		y_velocity = 0;
+		y_position = others_position->y + others_position->h;
+	}
+	
 }
 
 bool Ball::IsAlreadyDead()
