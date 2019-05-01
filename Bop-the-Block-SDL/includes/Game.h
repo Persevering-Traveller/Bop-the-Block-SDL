@@ -43,6 +43,15 @@ private:
 	Ball ball{ PLAY_AREA_WIDTH / 2, DESIGN_HEIGHT - 100, { 0, 0, PLAY_AREA_WIDTH, DESIGN_HEIGHT } };
 	LevelBuilder level_builder;
 
+	const int MAX_LEVELS = 3;
+	int level_number;
+	std::string levels[3] = {
+		"./data/levels/level1.dat",
+		"./data/levels/level2.dat",
+		"./data/levels/level3.dat",
+	};
+	
+
 	GUI gui;
 
 	const std::string HIGHSCORE_FILE = "./data/highscore.dat";
