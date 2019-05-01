@@ -17,6 +17,11 @@ void Block::SetPointValue(int value)
 	point_value = value;
 }
 
+bool Block::GetAlive()
+{
+	return alive;
+}
+
 void Block::HandleCollision()
 {
 	if (alive)

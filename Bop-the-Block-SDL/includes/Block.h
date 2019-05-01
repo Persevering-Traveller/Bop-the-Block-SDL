@@ -8,6 +8,7 @@ public:
 	Block();
 	int GetPointValue();
 	void SetPointValue(int value);
+	bool GetAlive();
 	void HandleCollision();
 
 	void Update();
