@@ -94,3 +94,16 @@ Block *LevelBuilder::GetBlockAt(int x, int y)
 {
 	return &level[x][y];
 }
+
+void LevelBuilder::Reset()
+{
+	for (auto &arr : level)
+	{
+		for (auto &block : arr)
+		{
+			block.Reset();
+		}
+	}
+
+	SetupLevel("./data/levels/level1.dat");
+}
