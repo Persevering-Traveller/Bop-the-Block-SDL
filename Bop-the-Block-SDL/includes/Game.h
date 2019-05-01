@@ -51,7 +51,6 @@ private:
 		"./data/levels/level3.dat",
 	};
 	
-
 	GUI gui;
 
 	const std::string HIGHSCORE_FILE = "./data/highscore.dat";

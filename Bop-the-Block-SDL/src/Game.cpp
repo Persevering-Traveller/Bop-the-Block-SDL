@@ -243,7 +243,7 @@ void Game::Update()
 		{
 			level_builder.Reset();
 			level_number++;
-			if (level_number > MAX_LEVELS)
+			if (level_number > MAX_LEVELS - 1)
 				level_number = 0;
 			level_builder.SetupLevel(levels[level_number]);
 		}
