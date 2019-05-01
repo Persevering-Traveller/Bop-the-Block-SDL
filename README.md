@@ -12,6 +12,4 @@ Bop the Block is a simple Arkanoid/Breakout clone heavily inspired by the GB cla
 * Blocks give points and disappear on collision
 
 ## TODO
-* Add sound effects for different collisions and death
-* Add in some background music
-* Display COMPLETE when a level is complete and play a fanfaire
+* Display COMPLETE when a level is complete
