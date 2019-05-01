@@ -9,7 +9,7 @@ class LevelBuilder
 public:
 	// Play_Area_Width / 16
 	static const int MAX_HORIZONTAL_BLOCKS = 14;
-	// (Design_Height / 2) + 8 / 8
+	// (Design_Height / 2) / 8
 	static const int MAX_VERTICAL_BLOCKS = 15;
 
 	LevelBuilder();
@@ -19,6 +19,7 @@ public:
 	void SetupLevel(std::string level_file_location);
 	void Draw(SDL_Renderer *renderer);
 	Block *GetBlockAt(int x, int y);
+	void Reset();
 
 private:
 	SDL_Texture *shared_texture;
