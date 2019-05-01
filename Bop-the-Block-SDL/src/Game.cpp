@@ -9,6 +9,7 @@ Game::Game()
 	top_score = score = 0;
 	ball_count = 3;
 	current_state = Game::State::START;
+	level_number = 0;
 }
 
 bool Game::Init()
@@ -104,7 +105,7 @@ bool Game::Setup()
 		status = false;
 	};
 
-	level_builder.SetupLevel("./data/levels/level1.dat");
+	level_builder.SetupLevel(levels[level_number]);
 
 	if (!gui.InitFont(renderer, "./data/font/font.ttf"))
 	{
@@ -233,13 +234,24 @@ void Game::Update()
 			highscore_file_stream.close();
 		}
 
+		// If ball falls out of the screen
 		if (ball.GetPosition().y > DESIGN_HEIGHT && !ball.IsAlreadyDead())
 			ball_count--;
+
+		// Change level if all blocks have been cleared
+		if (!level_builder.AnyBlocksLeft())
+		{
+			level_builder.Reset();
+			level_number++;
+			if (level_number > MAX_LEVELS)
+				level_number = 0;
+			level_builder.SetupLevel(levels[level_number]);
+		}
 
 		if (ball_count < 1)
 			current_state = Game::State::GAME_OVER;
 
-		gui.Update(renderer, top_score, score, 1, ball_count);
+		gui.Update(renderer, top_score, score, (level_number + 1), ball_count);
 	}
 }
 
@@ -272,7 +284,9 @@ void Game::Reset()
 	score = 0;
 	ball_count = 3;
 	current_state = Game::State::START;
+	level_number = 0;
 	level_builder.Reset();
+	level_builder.SetupLevel(levels[level_number]);
 	ball.Reset();
 	player.Reset();
 }
