@@ -95,6 +95,20 @@ Block *LevelBuilder::GetBlockAt(int x, int y)
 	return &level[x][y];
 }
 
+bool LevelBuilder::AnyBlocksLeft()
+{
+	bool any_left = false;
+	for (auto &arr : level)
+	{
+		for (auto &block : arr)
+		{
+			any_left = block.GetAlive();
+		}
+	}
+
+	return any_left;
+}
+
 void LevelBuilder::Reset()
 {
 	for (auto &arr : level)
@@ -104,6 +118,4 @@ void LevelBuilder::Reset()
 			block.Reset();
 		}
 	}
-
-	SetupLevel("./data/levels/level1.dat");
 }

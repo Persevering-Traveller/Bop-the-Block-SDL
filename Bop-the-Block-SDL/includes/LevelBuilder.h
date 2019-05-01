@@ -19,6 +19,7 @@ public:
 	void SetupLevel(std::string level_file_location);
 	void Draw(SDL_Renderer *renderer);
 	Block *GetBlockAt(int x, int y);
+	bool AnyBlocksLeft();
 	void Reset();
 
 private:
