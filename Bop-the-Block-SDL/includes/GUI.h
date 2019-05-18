@@ -13,6 +13,7 @@ public:
 	void Update(SDL_Renderer *renderer, int top, int score, int stage, int balls);
 	void DrawStart(SDL_Renderer *renderer);
 	void DrawGameplay(SDL_Renderer *renderer);
+	void DrawLevelClear(SDL_Renderer *renderer);
 	void DrawGameOver(SDL_Renderer *renderer);
 	void Quit();
 
@@ -33,10 +34,16 @@ private:
 	const int GAME_OVER_W = 300;
 	const int GAME_OVER_H = 20;
 
+	const int CLEAR_X = 50;
+	const int CLEAR_Y = 100;
+	const int CLEAR_W = 150;
+	const int CLEAR_H = 20;
+
 	const std::string TOP_SCORE_LABEL = "TOP\n";
 	const std::string SCORE_LABEL = "SCORE\n";
 	const std::string STAGE_LABEL = "STAGE\n";
 	const std::string BALLS_LABEL = "x ";
+	const std::string CLEAR_LABEL = "C L E A R ! !";
 	const std::string GAME_OVER_LABEL = "G  A  M  E    O  V  E  R";
 
 	// Yay, no need for a default constructor!
@@ -52,6 +59,7 @@ private:
 	Text score_text{ SCORE_LABEL + std::to_string(score_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET, TEXT_WIDTH, TEXT_HEIGHT };
 	Text stage_text{ STAGE_LABEL + std::to_string(stage_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET * 2, TEXT_WIDTH, TEXT_HEIGHT };
 	Text balls_text{ BALLS_LABEL + std::to_string(balls_prev), COLUMN_CENTER, ROW_START + ROW_OFFSET * 3, TEXT_WIDTH/2, TEXT_HEIGHT };
+	Text clear_text{ CLEAR_LABEL, CLEAR_X, CLEAR_Y, CLEAR_W, CLEAR_H };
 	Text game_over_text{ GAME_OVER_LABEL, GAME_OVER_X, GAME_OVER_Y, GAME_OVER_W, GAME_OVER_H };
 };
 #endif
