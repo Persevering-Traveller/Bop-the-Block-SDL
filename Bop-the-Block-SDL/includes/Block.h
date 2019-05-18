@@ -9,6 +9,7 @@ public:
 	int GetPointValue();
 	void SetPointValue(int value);
 	bool GetAlive();
+	void SetAlive(bool value);
 	void HandleCollision();
 
 	void Update();
