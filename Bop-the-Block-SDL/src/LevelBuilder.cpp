@@ -65,7 +65,8 @@ void LevelBuilder::SetupLevel(std::string level_file_location)
 		}
 		if (place == '1') //but place a block if there's a 1
 		{
-			level[i][j].SetPosition(i * 16, j * 8);
+			level[j][i].SetPosition(i * 16, j * 8);
+			level[j][i].SetAlive(true);
 			i++;
 		}
 		
@@ -97,25 +98,14 @@ Block *LevelBuilder::GetBlockAt(int x, int y)
 
 bool LevelBuilder::AnyBlocksLeft()
 {
-	bool any_left = false;
 	for (auto &arr : level)
 	{
 		for (auto &block : arr)
 		{
-			any_left = block.GetAlive();
+			if (block.GetAlive())
+				return true;
 		}
 	}
 
-	return any_left;
-}
-
-void LevelBuilder::Reset()
-{
-	for (auto &arr : level)
-	{
-		for (auto &block : arr)
-		{
-			block.Reset();
-		}
-	}
+	return false;
 }
