@@ -35,6 +35,12 @@ bool GUI::InitFont(SDL_Renderer *renderer, std::string file_location)
 		status = false;
 	}
 
+	if (!clear_text.Setup(renderer, gui_font))
+	{
+		printf("Could not setup Clear text!\n");
+		status = false;
+	}
+
 	if (!game_over_text.Setup(renderer, gui_font))
 	{
 		printf("Could not setup Game Over text!\n");
@@ -98,6 +104,11 @@ void GUI::DrawGameplay(SDL_Renderer *renderer)
 	score_text.Draw(renderer);
 	stage_text.Draw(renderer);
 	balls_text.Draw(renderer);
+}
+
+void GUI::DrawLevelClear(SDL_Renderer *renderer)
+{
+	clear_text.Draw(renderer);
 }
 
 void GUI::DrawGameOver(SDL_Renderer *renderer)
