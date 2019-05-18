@@ -10,6 +10,4 @@ Bop the Block is a simple Arkanoid/Breakout clone heavily inspired by the GB cla
 * Read and write to a file that keeps a high score
 * Reads from a file that keeps level details
 * Blocks give points and disappear on collision
-
-## TODO
-* Display COMPLETE when a level is complete
+* Display CLEAR when a level is complete
