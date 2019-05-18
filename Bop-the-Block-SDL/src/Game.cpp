@@ -10,6 +10,7 @@ Game::Game()
 	ball_count = 3;
 	current_state = Game::State::START;
 	level_number = 0;
+	clear_timer = 0;
 }
 
 bool Game::Init()
@@ -238,20 +239,38 @@ void Game::Update()
 		if (ball.GetPosition().y > DESIGN_HEIGHT && !ball.IsAlreadyDead())
 			ball_count--;
 
-		// Change level if all blocks have been cleared
+		// Change to Clear state when the level is cleared
 		if (!level_builder.AnyBlocksLeft())
 		{
-			level_builder.Reset();
-			level_number++;
-			if (level_number > MAX_LEVELS - 1)
-				level_number = 0;
-			level_builder.SetupLevel(levels[level_number]);
+			current_state = Game::State::CLEAR;
 		}
 
 		if (ball_count < 1)
 			current_state = Game::State::GAME_OVER;
 
 		gui.Update(renderer, top_score, score, (level_number + 1), ball_count);
+	}
+
+	// Count up the timer until it hits the timeout
+	// then build the new level
+	if (current_state == Game::State::CLEAR)
+	{
+		if (clear_timer != CLEAR_TIMEOUT)
+		{
+			clear_timer++;
+		}
+		else
+		{
+			clear_timer = 0;
+
+			// Change to next level
+			level_number++;
+			if (level_number > MAX_LEVELS - 1)
+				level_number = 0;
+			level_builder.SetupLevel(levels[level_number]);
+
+			current_state = Game::State::PLAY;
+		}
 	}
 }
 
@@ -271,6 +290,13 @@ void Game::Draw()
 		level_builder.Draw(renderer);
 		ball.Draw(renderer);
 		break;
+	case Game::State::CLEAR:
+		gui.DrawGameplay(renderer);
+		player.Draw(renderer);
+		level_builder.Draw(renderer);
+		ball.Draw(renderer);
+		gui.DrawLevelClear(renderer);
+		break;
 	case Game::State::GAME_OVER:
 		gui.DrawGameOver(renderer);
 		break;
@@ -285,7 +311,6 @@ void Game::Reset()
 	ball_count = 3;
 	current_state = Game::State::START;
 	level_number = 0;
-	level_builder.Reset();
 	level_builder.SetupLevel(levels[level_number]);
 	ball.Reset();
 	player.Reset();
