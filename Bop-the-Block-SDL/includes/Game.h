@@ -12,7 +12,7 @@
 
 class Game
 {
-	enum class State { START, PLAY, PAUSE, GAME_OVER };
+	enum class State { START, PLAY, PAUSE, CLEAR, GAME_OVER };
 
 public:
 	Game();
@@ -57,6 +57,9 @@ private:
 	std::fstream highscore_file_stream;
 	int score, top_score;
 	int ball_count;
+
+	int clear_timer;
+	const int CLEAR_TIMEOUT = 3 * 60;
 };
 
 #endif
