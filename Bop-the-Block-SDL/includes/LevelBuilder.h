@@ -20,7 +20,6 @@ public:
 	void Draw(SDL_Renderer *renderer);
 	Block *GetBlockAt(int x, int y);
 	bool AnyBlocksLeft();
-	void Reset();
 
 private:
 	SDL_Texture *shared_texture;
