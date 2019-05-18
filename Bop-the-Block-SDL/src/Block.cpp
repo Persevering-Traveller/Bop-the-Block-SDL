@@ -4,7 +4,7 @@ Block::Block()
 {
 	position = start_position = { -SPRITE_WIDTH, -SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT };
 	sprite.SetDrawingArea(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
-	alive = true;
+	alive = false;
 }
 
 int Block::GetPointValue()
@@ -22,6 +22,11 @@ bool Block::GetAlive()
 	return alive;
 }
 
+void Block::SetAlive(bool value)
+{
+	alive = value;
+}
+
 void Block::HandleCollision()
 {
 	if (alive)
@@ -37,7 +42,4 @@ void Block::Draw(SDL_Renderer *renderer)
 		SDL_RenderCopy(renderer, sprite.GetTexture(), &sprite.GetDrawingArea(), &position);
 }
 
-void Block::Reset()
-{
-	alive = true;
-}
+void Block::Reset() {}
